@@ -1,107 +1,61 @@
 import { pool } from '../db.js'
 
 export class Clientes {
-  static async getClients (req, res) {
+  static async getClients () {
     try {
       const [rows] = await pool.query('SELECT * FROM clientes')
-      res.status(200).json(rows)
+      return rows
     } catch (error) {
-      console.error('Error fetching clients:', error)
-      res.status(500).send('Error fetching clients')
+      console.error('Error fetching clients in model:', error)
+      throw error
     }
   }
 
-  static async getClientById (req, res) {
-    const { id } = req.params
-
-    if (!id) return res.status(400).send('ID is required')
-
+  static async getClientById (id) {
     try {
       const [rows] = await pool.query('SELECT * FROM clientes WHERE id = ?', [id])
-
-      if (rows.length === 0) {
-        return res.status(404).json({
-          message: 'Cliente no encontrado'
-        })
-      }
-
-      res.status(200).json(rows[0])
+      return rows
     } catch (error) {
-      console.error('Error fetching client:', error)
-      res.status(500).send('Error fetching client')
+      console.error('Error fetching client by ID in model:', error)
+      throw error
     }
   }
 
-  static async createClient (req, res) {
-    const { identificacion, tipoIdentificacion, nombre, apellido, direccion, idCanton, telefono, correo } = req.body
+  static async createClient (client) {
     try {
-      const [results] = await pool.query(
-        'INSERT INTO clientes(Identificacion, Tipo_Identificacion, Nombre, Apellido, Direccion, Id_Canton, Telefono, Correo) VALUES(?,?,?,?,?,?,?,?)',
+      const { identificacion, tipoIdentificacion, nombre, apellido, direccion, idCanton, telefono, correo } = client
+      const [result] = await pool.query(
+        'INSERT INTO clientes (Identificacion, Tipo_Identificacion, Nombre, Apellido, Direccion, Id_Canton, Telefono, Correo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
         [identificacion, tipoIdentificacion, nombre, apellido, direccion, idCanton, telefono, correo]
       )
-
-      res.status(201).send({
-        Id: results.insertId,
-        identificacion,
-        tipoIdentificacion,
-        nombre,
-        apellido,
-        direccion,
-        idCanton,
-        telefono,
-        correo
-      })
-    } catch (e) {
-      console.error('Error creating client:', e)
-      res.status(500).send('Error creating client')
+      return result.insertId
+    } catch (error) {
+      console.error('Error creating client in model:', error)
+      throw error
     }
   }
 
-  static async updateClient (req, res) {
-    const { identificacion, tipoIdentificacion, nombre, apellido, direccion, idCanton, telefono, correo } = req.body
+  static async updateClient (id, client) {
     try {
+      const { identificacion, tipoIdentificacion, nombre, apellido, direccion, idCanton, telefono, correo } = client
       const [result] = await pool.query(
         'UPDATE clientes SET Identificacion = ?, Tipo_Identificacion = ?, Nombre = ?, Apellido = ?, Direccion = ?, Id_Canton = ?, Telefono = ?, Correo = ? WHERE id = ?',
-        [identificacion, tipoIdentificacion, nombre, apellido, direccion, idCanton, telefono, correo, req.params.id]
+        [identificacion, tipoIdentificacion, nombre, apellido, direccion, idCanton, telefono, correo, id]
       )
-
-      if (result.affectedRows === 0) {
-        return res.status(404).json({
-          message: 'Cliente no encontrado'
-        })
-      }
-
-      res.status(200).send({
-        Id: req.params.id,
-        identificacion,
-        tipoIdentificacion,
-        nombre,
-        apellido,
-        direccion,
-        idCanton,
-        telefono,
-        correo
-      })
+      return result.affectedRows
     } catch (error) {
-      console.error('Error updating client:', error)
-      res.status(500).send('Error updating client')
+      console.error('Error updating client in model:', error)
+      throw error
     }
   }
 
-  static async deleteClient (req, res) {
+  static async deleteClientById (id) {
     try {
-      const [result] = await pool.query('DELETE FROM clientes WHERE id = ?', [req.params.id])
-
-      if (result.affectedRows === 0) {
-        return res.status(404).json({
-          message: 'Cliente no encontrado'
-        })
-      }
-
-      res.status(200).json({ message: 'Cliente eliminado' })
+      const [result] = await pool.query('DELETE FROM clientes WHERE id = ?', [id])
+      return result
     } catch (error) {
-      console.error('Error deleting client:', error)
-      res.status(500).send('Error deleting client')
+      console.error('Error deleting client in model:', error)
+      throw error
     }
   }
 }
