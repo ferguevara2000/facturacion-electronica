@@ -1,6 +1,6 @@
 import { pool } from '../db.js'
 
-export class Clientes {
+export class ClientesModel {
   static async getClients () {
     try {
       const [rows] = await pool.query('SELECT * FROM clientes')

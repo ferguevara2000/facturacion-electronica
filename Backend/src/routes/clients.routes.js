@@ -6,11 +6,11 @@ export const createClientRouter = ({ clientModel }) => {
 
   const clientController = new ClientController({ clientModel })
 
-  router.post('/clients', clientController.saveClient) // Crear cliente
-  router.put('/clients/:id', clientController.saveClient) // Actualizar cliente
-  router.delete('/clients/:id', clientController.deleteClient)
-  router.get('/clients/:id', clientController.getClientById)
-  router.get('/clients', clientController.getClients)
+  router.post('/', clientController.saveClient) // Crear cliente
+  router.put('/:id', clientController.saveClient) // Actualizar cliente
+  router.delete('/:id', clientController.deleteClient)
+  router.get('/:id', clientController.getClientById)
+  router.get('/', clientController.getClients)
 
   return router
 }
