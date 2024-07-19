@@ -1,4 +1,4 @@
 import { createApp } from './app'
-import { ClientesModel } from './models/clientes.model'
+import { ClientsModel } from './models/clients.model'
 
-createApp({ clientsModel: ClientesModel })
+createApp({ clientsModel: ClientsModel })
