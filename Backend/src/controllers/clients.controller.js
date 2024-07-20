@@ -3,7 +3,7 @@ export class ClientController {
     this.clientModel = clientModel
   }
 
-  static async getClients (req, res) {
+  getClients = async (req, res) => {
     try {
       const clients = await this.clientModel.getClients()
       res.status(200).json(clients)
@@ -13,7 +13,7 @@ export class ClientController {
     }
   }
 
-  static async getClientById (req, res) {
+  getClientById = async (req, res) => {
     const { id } = req.params
 
     if (!id) return res.status(400).send('ID is required')
@@ -34,10 +34,9 @@ export class ClientController {
     }
   }
 
-  static async saveClient (req, res) {
+  saveClient = async (req, res) => {
     const { id } = req.params
     const clientData = req.body
-
     try {
       if (id) {
         // Si el ID está presente, actualizamos el cliente
@@ -48,7 +47,7 @@ export class ClientController {
         res.status(200).json({ message: 'Cliente actualizado', id })
       } else {
         // Si el ID no está presente, creamos un nuevo cliente
-        const newClientId = await this.clientModel.createClient(clientData)
+        const newClientId = await this.clientModel.createClient({ client: clientData })
         res.status(201).json({ message: 'Cliente creado', id: newClientId })
       }
     } catch (error) {
@@ -57,7 +56,7 @@ export class ClientController {
     }
   }
 
-  static async deleteClient (req, res) {
+  deleteClient = async (req, res) => {
     const { id } = req.params
 
     if (!id) return res.status(400).send('ID is required')

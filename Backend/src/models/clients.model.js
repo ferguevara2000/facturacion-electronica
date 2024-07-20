@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { pool } from '../db.js'
 
 export class ClientsModel {
@@ -21,12 +22,12 @@ export class ClientsModel {
     }
   }
 
-  static async createClient (client) {
+  static async createClient ({ client }) {
     try {
-      const { identificacion, tipoIdentificacion, nombre, apellido, direccion, idCanton, telefono, correo } = client
+      const { Identificacion, Tipo_Identificacion, Nombre, Apellido, Direccion, Id_Canton, Telefono, Correo } = client
       const [result] = await pool.query(
         'INSERT INTO clientes (Identificacion, Tipo_Identificacion, Nombre, Apellido, Direccion, Id_Canton, Telefono, Correo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [identificacion, tipoIdentificacion, nombre, apellido, direccion, idCanton, telefono, correo]
+        [Identificacion, Tipo_Identificacion, Nombre, Apellido, Direccion, Id_Canton, Telefono, Correo]
       )
       return result.insertId
     } catch (error) {
@@ -37,10 +38,10 @@ export class ClientsModel {
 
   static async updateClient (id, client) {
     try {
-      const { identificacion, tipoIdentificacion, nombre, apellido, direccion, idCanton, telefono, correo } = client
+      const { Identificacion, Tipo_Identificacion, Nombre, Apellido, Direccion, Id_Canton, Telefono, Correo } = client
       const [result] = await pool.query(
         'UPDATE clientes SET Identificacion = ?, Tipo_Identificacion = ?, Nombre = ?, Apellido = ?, Direccion = ?, Id_Canton = ?, Telefono = ?, Correo = ? WHERE id = ?',
-        [identificacion, tipoIdentificacion, nombre, apellido, direccion, idCanton, telefono, correo, id]
+        [Identificacion, Tipo_Identificacion, Nombre, Apellido, Direccion, Id_Canton, Telefono, Correo, id]
       )
       return result.affectedRows
     } catch (error) {
