@@ -1,3 +1,5 @@
+import { validateClient } from '../schemas/clients.js'
+
 export class ClientController {
   constructor ({ clientModel }) {
     this.clientModel = clientModel
@@ -37,6 +39,8 @@ export class ClientController {
   saveClient = async (req, res) => {
     const { id } = req.params
     const clientData = req.body
+    const result = validateClient(clientData)
+    if (!result.success) return res.status(400).json({ error: JSON.parse(result.error.message) })
     try {
       if (id) {
         // Si el ID está presente, actualizamos el cliente
