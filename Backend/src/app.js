@@ -1,10 +1,13 @@
 import express from 'express'
 import { createClientRouter } from './routes/clients.routes.js'
 import { PORT } from './config.js'
+import { corsMiddleware } from './middlewares/cors.js'
 
 export const createApp = ({ clientModel }) => {
   const app = express()
   app.use(express.json())
+  app.use(corsMiddleware)
+  app.disable('x-powered-by')
 
   app.use('/clients', createClientRouter({ clientModel }))
 
