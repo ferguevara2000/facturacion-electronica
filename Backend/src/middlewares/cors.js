@@ -1,19 +1,27 @@
 import cors from 'cors'
 
-const ACEEPTED_ORIGINS = [
+const ACCEPTED_ORIGINS = [
   'http://localhost:3000',
   'http://localhost:8080',
   'https://your-frontend-url.com'
 ]
 
-export const corsMiddleware = ({ acceptedOrigins = ACEEPTED_ORIGINS } = {}) => cors({
-  origin: (origin, callback) => {
-    if (acceptedOrigins.includes(origin)) {
-      callback(null, true)
+export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) => {
+  return cors({
+    origin: (origin, callback) => {
+      // Si el origen está en la lista de orígenes aceptados
+      if (acceptedOrigins.includes(origin)) {
+        return callback(null, true)
+      }
+
+      // Si no hay origen (peticiones desde Postman o similares)
+      if (!origin) {
+        // Permitir la petición sin origen (cambiar a `true` si quieres permitir)
+        return callback(null, true)
+      }
+
+      // Si el origen no está permitido
+      return callback(new Error('Not allowed by CORS'))
     }
-
-    if (!origin) return callback(null, false)
-
-    return callback(new Error('Not allowed by CORS'))
-  }
-})
+  })
+}
