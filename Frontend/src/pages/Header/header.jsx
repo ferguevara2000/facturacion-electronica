@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import userImage from "../../assets/profile.jpeg";
@@ -7,16 +7,8 @@ import { MdMenuOpen, MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 //import { MdOutlineMenu } from "react-icons/md";
 
 // Menu Component
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -27,7 +19,7 @@ function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
   return (
     <header className="d-flex align-items-center">
       <div className="container-fluid w-100">
@@ -52,7 +44,10 @@ function Header() {
             </Button>
 
             <div className="myAccWrapper">
-              <Button className="myAcc d-flex align-items-center">
+              <Button
+                className="myAcc d-flex align-items-center"
+                onClick={handleClick}
+              >
                 <div className="userImg">
                   <span className="rounded-circle">
                     <img src={userImage} alt="" />
@@ -64,6 +59,22 @@ function Header() {
                   <p className="mb-0">@ferguevara2000</p>
                 </div>
               </Button>
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <MenuItem onClick={handleClose}>
+                <i className="bi bi-person-circle me-3 icon"></i>Mi Cuenta
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                <i className="bi bi-box-arrow-left me-3 icon"></i>Cerrar Sesión
+                </MenuItem>
+              </Menu>
             </div>
           </div>
         </div>
