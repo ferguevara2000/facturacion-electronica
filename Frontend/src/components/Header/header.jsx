@@ -28,7 +28,7 @@ function Header() {
           <div className="col-2 part1">
             <Link to={"/"} className="d-flex align-items-center logo">
               <img src={logo} alt="Logo" />
-              <span className="ms-1">FACTURADOR</span>
+              <span className="ms-1">SYSFACT</span>
             </Link>
           </div>
 
