@@ -131,15 +131,20 @@ header button.rounded-circle svg{
   left: 0;
   background: #fff;
   overflow-y: scroll;
+  overflow-x: hidden;
   padding-bottom: 40px;
 }
 
 .main .sidebarWrapper .sidebar::-webkit-scrollbar{
-  display: none;
+  width: 3px;
+}
+
+.main .sidebarWrapper .sidebar::-webkit-scrollbar-thumb{
+  background: transparent !important;
 }
 
 .main .sidebarWrapper:hover .sidebar::-webkit-scrollbar{
-  display: block;
+  background: #0858f7;
 }
 
 .main .sidebarWrapper .sidebar ul{
@@ -156,7 +161,7 @@ header button.rounded-circle svg{
   text-align: left;
   justify-content: left;
   border-radius: 10px !important;
-  padding: 12px 15px !important;
+  padding: 12px 10px !important;
   align-items: center;
   text-transform: capitalize !important;
   font-weight: 700 !important;
