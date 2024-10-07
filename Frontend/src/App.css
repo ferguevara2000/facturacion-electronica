@@ -131,15 +131,20 @@ header button.rounded-circle svg{
   left: 0;
   background: #fff;
   overflow-y: scroll;
+  overflow-x: hidden;
   padding-bottom: 40px;
 }
 
 .main .sidebarWrapper .sidebar::-webkit-scrollbar{
-  display: none;
+  width: 3px;
+}
+
+.main .sidebarWrapper .sidebar::-webkit-scrollbar-thumb{
+  background: transparent !important;
 }
 
 .main .sidebarWrapper:hover .sidebar::-webkit-scrollbar{
-  display: block;
+  background: #0858f7;
 }
 
 .main .sidebarWrapper .sidebar ul{
@@ -152,14 +157,15 @@ header button.rounded-circle svg{
 }
 
 .main .sidebarWrapper .sidebar ul li button{
-  color: rgba(0, 0, 0, 0.8);
+  color: #5e5d72;
   text-align: left;
   justify-content: left;
   border-radius: 10px !important;
-  padding: 12px 15px !important;
+  padding: 12px 10px !important;
   align-items: center;
   text-transform: capitalize !important;
   font-weight: 700 !important;
+  font-size: 15px;
 }
 
 .main .sidebarWrapper .sidebar ul li button .icon{
@@ -194,6 +200,44 @@ header button.rounded-circle svg{
 
 .main .sidebarWrapper .sidebar ul li button:hover{
   background-color: #f2f2f2 !important;
+}
+
+.main .sidebarWrapper .sidebar ul li button.act{
+  background-color: #f2f2f2
+}
+
+.main .sidebarWrapper .sidebar ul .submenu{
+  padding: 0px 45px;
+  position: relative;
+}
+
+.main .sidebarWrapper .sidebar ul .submenu::before{
+  content: '';
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 25px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.main .sidebarWrapper .sidebar ul .submenu li{
+  width: 100%;
+  list-style: none;
+}
+
+.main .sidebarWrapper .sidebar ul .submenu li a{
+  color: #5e5d72;
+  text-decoration: none;
+  display: block;
+  padding: 6px 0px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0 3s;
+}
+
+.main .sidebarWrapper .sidebar ul .submenu li a:hover{
+  color: #0858f7;
 }
 
 
