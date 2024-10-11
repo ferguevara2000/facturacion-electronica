@@ -202,13 +202,15 @@ header button.rounded-circle svg{
   background-color: #f2f2f2 !important;
 }
 
-.main .sidebarWrapper .sidebar ul li button.act{
+.main .sidebarWrapper .sidebar ul li button.active{
   background-color: #f2f2f2
 }
 
 .main .sidebarWrapper .sidebar ul .submenu{
   padding: 0px 45px;
   position: relative;
+  transition: all 0.3s;
+  height: 0;
 }
 
 .main .sidebarWrapper .sidebar ul .submenu::before{
@@ -240,5 +242,23 @@ header button.rounded-circle svg{
   color: #0858f7;
 }
 
+.main .sidebarWrapper .sidebar ul .submenuWrapper{
+  transition: all 0.3s;
+  height: 0px;
+  overflow: hidden;
+}
 
+.main .sidebarWrapper .sidebar ul .submenuWrapper.colapsed .submenu {
+  opacity: 0;
+}
+
+.main .sidebarWrapper .sidebar ul .submenuWrapper.colapse{
+  height: auto;
+  overflow: inherit;
+}
+
+.main .sidebarWrapper .sidebar ul .submenuWrapper.colapse .submenu {
+  opacity: 1;
+  height: auto;
+}
 
