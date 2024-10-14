@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import userImage from "../../assets/profile.jpeg";
@@ -10,8 +10,8 @@ import { MdMenuOpen, MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-function Header() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+function Header({ toggleSidebar }) {
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -33,7 +33,7 @@ function Header() {
           </div>
 
           <div className="col-3 d-flex align-items-center part2 ps-4">
-            <Button className="rounded-circle">
+            <Button className="rounded-circle" onClick={toggleSidebar}>
               <MdMenuOpen />
             </Button>
           </div>
