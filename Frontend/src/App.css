@@ -262,3 +262,14 @@ header button.rounded-circle svg{
   height: auto;
 }
 
+.sidebar {
+  transition: width 0.3s ease;
+}
+
+.sidebar.expanded {
+  width: 60px; /* O el ancho deseado para solo mostrar íconos */
+}
+
+.sidebar.close {
+  width: 200px; /* O el ancho deseado para mostrar el menú completo */
+}

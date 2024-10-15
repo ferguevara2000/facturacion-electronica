@@ -27,6 +27,7 @@
     "extends": "standard"
   },
   "dependencies": {
+    "backend": "file:",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "ec-docs-validator": "^1.0.5",
