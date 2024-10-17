@@ -1,44 +1,24 @@
-// import icons
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "remixicon/fonts/remixicon.css";
+"use client";
 
-// import Bootstrap
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
+import { useState } from "react";
+import Sidebar from "./components/Sidebar/sidebar.jsx";
+import Header from "./components/Header/header.jsx";
 
-import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/Dashboard/dashboard";
-import Header from "./components/Header/header";
-import Sidebar from "./components/Sidebar/sidebar";
-import React, { useState } from 'react';
+export default function App() {
+  const [isOpen, setIsOpen] = useState(false);
 
-function App() {
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    console.log('Toggling sidebar'); // Asegúrate de que se llame
-    setIsSidebarOpen(prevState => !prevState);
-  };
+  const toggleSidebar = () => setIsOpen(!isOpen);
 
   return (
-    <BrowserRouter>
-      <Header toggleSidebar={toggleSidebar}/>
-      <div className="main d-flex">
-        <div className="sidebarWrapper">
-          <Sidebar isOpen={isSidebarOpen}/>
+    <div className="relative min-h-screen">
+      <Header />
+      <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+      <main className={`pt-16 transition-all duration-300 ${isOpen ? "ml-64" : "ml-16"}`}>
+        <div className="p-4">
+          <h1 className="text-2xl font-bold">Contenido Principal</h1>
+          <p>Este es el área de contenido principal de tu aplicación.</p>
         </div>
-
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </div>
-      </div>
-    </BrowserRouter>
+      </main>
+    </div>
   );
 }
-
-export default App;
