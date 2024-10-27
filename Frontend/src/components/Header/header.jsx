@@ -14,10 +14,10 @@ export default function Header() {
   useEffect(() => setMounted(true), [])
 
   return (
-    <header className="fixed top-0 right-0 left-0 bg-background z-40 h-16 flex items-center justify-end px-4 border-b">
+    <header className="header fixed top-0 right-0 left-0 bg-background z-40 h-16 flex items-center justify-end px-4 border-b">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="flex items-center space-x-2">
+          <Button variant="ghost" className="flex items-center space-x-2 transition-all duration-200 p-3 rounded-md h-12">
             <Avatar>
               <AvatarImage src="/placeholder.svg?height=32&width=32" alt="@usuario" />
               <AvatarFallback>UN</AvatarFallback>
@@ -25,7 +25,7 @@ export default function Header() {
             <span>Usuario Nombre</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="header w-44">
           <DropdownMenuItem>
             <User className="mr-2 h-4 w-4" />
             <span>Mi Perfil</span>
