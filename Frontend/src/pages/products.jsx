@@ -43,7 +43,7 @@ export default function Products() {
       <h1 className="text-2xl font-bold mb-4">Listado de Productos</h1>
       
       <div className="flex justify-between mb-4">
-        <Button>
+        <Button >
           <Plus className="mr-2 h-4 w-4" /> Agregar Producto
         </Button>
         <div className="relative">
