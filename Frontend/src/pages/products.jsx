@@ -19,7 +19,7 @@ const mockProducts = Array(50).fill(null).map((_, i) => ({
   price: (Math.random() * 100 + 10).toFixed(2)
 }))
 
-export default function Products() {
+export default function ProductList() {
   const [searchTerm, setSearchTerm] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const productsPerPage = 10
@@ -43,7 +43,7 @@ export default function Products() {
       <h1 className="text-2xl font-bold mb-4">Listado de Productos</h1>
       
       <div className="flex justify-between mb-4">
-        <Button >
+        <Button>
           <Plus className="mr-2 h-4 w-4" /> Agregar Producto
         </Button>
         <div className="relative">
@@ -57,20 +57,29 @@ export default function Products() {
         </div>
       </div>
 
+      <div className="w-full overflow-auto">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>ID</TableHead>
-            <TableHead>Producto</TableHead>
-            <TableHead>Categoría</TableHead>
-            <TableHead>Precio</TableHead>
-            <TableHead>Acción</TableHead>
+            <TableHead className="w-[100px]">ID</TableHead>
+            <TableHead className="w-[100px]">Imagen</TableHead>
+            <TableHead className="w-[200px]">Producto</TableHead>
+            <TableHead className="w-[150px]">Categoría</TableHead>
+            <TableHead className="w-[100px]">Precio</TableHead>
+            <TableHead className="w-[100px]">Acción</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {currentProducts.map((product) => (
             <TableRow key={product.id}>
-              <TableCell>{product.id}</TableCell>
+              <TableCell className="font-medium">{product.id}</TableCell>
+              <TableCell>
+                <img
+                  src={`/placeholder.svg?height=50&width=50`}
+                  alt={`Imagen de ${product.name}`}
+                  className="w-12 h-12 object-cover rounded"
+                />
+              </TableCell>
               <TableCell>{product.name}</TableCell>
               <TableCell>{product.category}</TableCell>
               <TableCell>${product.price}</TableCell>
@@ -86,6 +95,7 @@ export default function Products() {
           ))}
         </TableBody>
       </Table>
+      </div>
 
       <div className="flex justify-center mt-4">
         {Array(Math.ceil(filteredProducts.length / productsPerPage)).fill(null).map((_, i) => (
