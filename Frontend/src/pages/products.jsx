@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Plus, Search, Pencil, Trash2 } from 'lucide-react'
+import { useState } from 'react'
+import { Plus, Search, Pencil, Trash2, Eye } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import  defaultImgae  from "../assets/default-image.jpg"
 
 // Mock data
 const mockProducts = Array(50).fill(null).map((_, i) => ({
@@ -75,7 +76,7 @@ export default function ProductList() {
               <TableCell className="font-medium">{product.id}</TableCell>
               <TableCell>
                 <img
-                  src={`/placeholder.svg?height=50&width=50`}
+                  src={`${defaultImgae}?height=50&width=50`}
                   alt={`Imagen de ${product.name}`}
                   className="w-12 h-12 object-cover rounded"
                 />
@@ -84,6 +85,9 @@ export default function ProductList() {
               <TableCell>{product.category}</TableCell>
               <TableCell>${product.price}</TableCell>
               <TableCell>
+                <Button variant="ghost" size="icon" className="mr-2">
+                  <Eye className="h-4 w-4"/>
+                </Button>
                 <Button variant="ghost" size="icon" className="mr-2">
                   <Pencil className="h-4 w-4" />
                 </Button>

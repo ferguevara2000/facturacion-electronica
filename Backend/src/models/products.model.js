@@ -24,10 +24,10 @@ export class ProductsModel {
 
   static async createProduct ({ product }) {
     try {
-      const { Nombre, Precio_Unitario, Precio_Adquisicion, Tasa_IVA, Id_Categoria, Id_ICE } = product
+      const { Nombre, Precio_Unitario, Precio_Adquisicion, Tasa_IVA, Id_Categoria, Id_ICE, imagen_url } = product
       const [result] = await pool.query(
-        'INSERT INTO productos (Nombre, Precio_Unitario, Precio_Adquisicion, Tasa_IVA, Id_Categoria, Id_ICE) VALUES (?, ?, ?, ?, ?, ?)',
-        [Nombre, Precio_Unitario, Precio_Adquisicion, Tasa_IVA, Id_Categoria, Id_ICE]
+        'INSERT INTO productos (Nombre, Precio_Unitario, Precio_Adquisicion, Tasa_IVA, Id_Categoria, Id_ICE, imagen_url) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [Nombre, Precio_Unitario, Precio_Adquisicion, Tasa_IVA, Id_Categoria, Id_ICE, imagen_url]
       )
       return result.insertId
     } catch (error) {

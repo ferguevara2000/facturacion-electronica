@@ -39,19 +39,33 @@ export class ProductController {
   saveProduct = async (req, res) => {
     const { id } = req.params
     const productData = req.body
+
+    // Validar datos del producto
     const result = validateProduct(productData)
     if (!result.success) return res.status(400).json({ error: JSON.parse(result.error.message) })
+
     try {
+      // Si se subió un archivo de imagen, agregar la URL de la imagen a los datos del producto
+      if (req.file) {
+        productData.imagen_url = `/uploads/${req.file.filename}`
+      }
+
       if (id) {
-        // Si el ID está presente, actualizamos el cliente
-        const affectedRows = await this.productModel.updateProduct(id, productData)
+        // Si el ID está presente, actualizamos el producto
+        const affectedRows = await this.productModel.updateProduct(
+          id,
+          productData
+        )
+
         if (affectedRows === 0) {
           return res.status(404).json({ message: 'Producto no encontrado' })
         }
         res.status(200).json({ message: 'Producto actualizado', id })
       } else {
-        // Si el ID no está presente, creamos un nuevo cliente
-        const newProductId = await this.productModel.createProduct({ product: productData })
+        // Si el ID no está presente, creamos un nuevo producto
+        const newProductId = await this.productModel.createProduct({
+          product: productData
+        })
         res.status(201).json({ message: 'Producto creado', id: newProductId })
       }
     } catch (error) {
