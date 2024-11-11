@@ -46,19 +46,18 @@ export class ProductController {
     productData.Id_Categoria = parseInt(productData.Id_Categoria)
     productData.Id_ICE = parseInt(productData.Id_ICE)
 
-    // Definimos un valor vacío para `imagen_url` si no se ha subido una imagen
-    productData.imagen_url = ''
+    // Si se subió un archivo de imagen, asignamos la URL con el nuevo nombre del archivo
+    if (req.file) {
+      productData.imagen_url = `/uploads/${req.file.filename}`
+    } else {
+      productData.imagen_url = '' // Definir un valor predeterminado si no hay imagen
+    }
 
     // Validar datos del producto
     const result = validateProduct(productData)
     if (!result.success) return res.status(400).json({ error: JSON.parse(result.error.message) })
 
     try {
-      // Si se subió un archivo de imagen, agregar la URL de la imagen a los datos del producto
-      if (req.file) {
-        productData.imagen_url = `./uploads/${req.file.filename}`
-      }
-
       if (id) {
         // Si el ID está presente, actualizamos el producto
         const affectedRows = await this.productModel.updateProduct(

@@ -7,7 +7,10 @@ const storage = multer.diskStorage({
     cb(null, './uploads') // Directorio donde se guardarán las imágenes
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)) // Renombra el archivo
+    // Utiliza el nombre del producto y la extensión del archivo
+    const productName = req.body.Nombre.replace(/\s+/g, '_') // Reemplaza espacios por guiones bajos
+    const fileExtension = path.extname(file.originalname)
+    cb(null, `${productName}${fileExtension}`)
   }
 })
 
