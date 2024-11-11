@@ -40,6 +40,15 @@ export class ProductController {
     const { id } = req.params
     const productData = req.body
 
+    productData.Precio_Unitario = parseFloat(productData.Precio_Unitario)
+    productData.Precio_Adquisicion = parseFloat(productData.Precio_Adquisicion)
+    productData.Tasa_IVA = parseInt(productData.Tasa_IVA)
+    productData.Id_Categoria = parseInt(productData.Id_Categoria)
+    productData.Id_ICE = parseInt(productData.Id_ICE)
+
+    // Definimos un valor vacío para `imagen_url` si no se ha subido una imagen
+    productData.imagen_url = ''
+
     // Validar datos del producto
     const result = validateProduct(productData)
     if (!result.success) return res.status(400).json({ error: JSON.parse(result.error.message) })
@@ -47,7 +56,7 @@ export class ProductController {
     try {
       // Si se subió un archivo de imagen, agregar la URL de la imagen a los datos del producto
       if (req.file) {
-        productData.imagen_url = `/uploads/${req.file.filename}`
+        productData.imagen_url = `./uploads/${req.file.filename}`
       }
 
       if (id) {
