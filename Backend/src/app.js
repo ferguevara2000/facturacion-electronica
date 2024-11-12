@@ -11,6 +11,8 @@ export const createApp = ({ clientModel, productModel }) => {
   app.use(corsMiddleware())
   app.disable('x-powered-by')
 
+  app.use('/uploads', express.static('uploads'))
+
   app.use('/clients', createClientRouter({ clientModel }))
   app.use('/products', createProductRouter({ productModel }))
 
