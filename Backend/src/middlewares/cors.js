@@ -3,7 +3,8 @@ import cors from 'cors'
 const ACCEPTED_ORIGINS = [
   'http://localhost:3000',
   'http://localhost:8080',
-  'https://your-frontend-url.com'
+  'https://your-frontend-url.com',
+  'http://localhost:5173'
 ]
 
 export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) => {

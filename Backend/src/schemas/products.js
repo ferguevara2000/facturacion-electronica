@@ -22,7 +22,8 @@ const ProductsSchema = z.object({
     message: 'Tasa_IVA must be either 0 or 15'
   }),
   Id_Categoria: z.number().int().min(1).max(8),
-  Id_ICE: z.number().int().min(1).max(6)
+  Id_ICE: z.number().int().min(1).max(6),
+  imagen_url: z.string()
 })
 
 export function validateProduct (productSchema) {

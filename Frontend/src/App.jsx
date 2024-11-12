@@ -1,44 +1,42 @@
-// import icons
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "remixicon/fonts/remixicon.css";
+"use client";
 
-// import Bootstrap
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
+import { useState, useEffect } from "react";
+import Sidebar from "./components/Sidebar/sidebar.jsx";
+import Header from "./components/Header/header.jsx";
+import { Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/dashboard.jsx";
+import Products from "./pages/products.jsx";
 
-import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/Dashboard/dashboard";
-import Header from "./components/Header/header";
-import Sidebar from "./components/Sidebar/sidebar";
-import React, { useState } from 'react';
+export default function App() {
+  const [theme, setTheme] = useState("light");
 
-function App() {
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    console.log('Toggling sidebar'); // Asegúrate de que se llame
-    setIsSidebarOpen(prevState => !prevState);
+  // Cambia el tema y guarda en localStorage
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
   };
 
-  return (
-    <BrowserRouter>
-      <Header toggleSidebar={toggleSidebar}/>
-      <div className="main d-flex">
-        <div className="sidebarWrapper">
-          <Sidebar isOpen={isSidebarOpen}/>
-        </div>
+  // Lee el tema guardado en localStorage
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+  }, []);
 
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </div>
-      </div>
-    </BrowserRouter>
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => setIsOpen(!isOpen);
+
+  return (
+    <div className={`relative min-h-screen ${theme}`}>
+      <Header />
+      <Sidebar toggleTheme={toggleTheme} theme={theme} isOpen={isOpen} toggleSidebar={toggleSidebar}/>
+      <main className={`main-content pt-16 transition-all duration-300 ${isOpen ? "ml-64" : "ml-16"}`}>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/products" element={<Products />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
-
-export default App;
