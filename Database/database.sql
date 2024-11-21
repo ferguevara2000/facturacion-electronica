@@ -48,6 +48,7 @@ CREATE TABLE Productos (
     Tasa_IVA INT,
     Id_Categoria INT,
     Id_ICE INT,
+    imagen_url VARCHAR(255),
     FOREIGN KEY (Id_Categoria) REFERENCES Categorias(Id),
     FOREIGN KEY (Id_ICE) REFERENCES ICE(Id)
 ) AUTO_INCREMENT=1000;
