@@ -45,12 +45,13 @@ CREATE TABLE Productos (
     Nombre VARCHAR(100) NOT NULL UNIQUE,
     Precio_Unitario DECIMAL(10, 2) NOT NULL,
     Precio_Adquisicion DECIMAL(10, 2),
-    Tasa_IVA DECIMAL(5, 2),
+    Tasa_IVA INT,
     Id_Categoria INT,
     Id_ICE INT,
     FOREIGN KEY (Id_Categoria) REFERENCES Categorias(Id),
     FOREIGN KEY (Id_ICE) REFERENCES ICE(Id)
-);
+) AUTO_INCREMENT=1000;
+
 
 -- Tabla Facturas_Header
 CREATE TABLE Facturas_Header (
