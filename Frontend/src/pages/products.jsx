@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Plus, Search, Pencil, Trash2, Eye } from 'lucide-react'
+import { Search, Pencil, Trash2, Eye } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import defaultImage from "../assets/default-image.jpg"
+import ProductModal from '../components/Products/ProductModal'
 
 export default function ProductList() {
   const [products, setProducts] = useState([])
@@ -51,9 +52,7 @@ export default function ProductList() {
       <h1 className="text-2xl font-bold mb-4">Listado de Productos</h1>
       
       <div className="flex justify-between mb-4">
-        <Button>
-          <Plus className="mr-2 h-4 w-4" /> Agregar Producto
-        </Button>
+        <ProductModal/>
         <div className="relative">
           <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -113,7 +112,7 @@ export default function ProductList() {
           <Button
             key={i}
             variant={currentPage === i + 1 ? "default" : "outline"}
-            className="mx-1"
+            className="mx-1 bg-white text-black hover:bg-gray-200 border border-black"
             onClick={() => paginate(i + 1)}
           >
             {i + 1}
